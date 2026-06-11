@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>OpenCode Go Chat</title>
+<title>OC Go Chat</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -14,124 +14,42 @@ body {
   display: flex;
   flex-direction: column;
 }
-.header {
-  background: #1a1a2e;
-  padding: 14px 16px;
-  text-align: center;
-  border-bottom: 1px solid #2a2a4a;
-}
-.header h1 { font-size: 18px; color: #fff; margin-bottom: 4px; }
-.header span { font-size: 12px; color: #888; }
-.chat-box {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.msg {
-  max-width: 85%;
-  padding: 10px 14px;
-  border-radius: 16px;
-  font-size: 15px;
-  line-height: 1.5;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-}
+.header { background: #1a1a2e; padding: 12px 16px; text-align: center; border-bottom: 1px solid #2a2a4a; position: relative; }
+.header h1 { font-size: 17px; color: #fff; }
+.header span { font-size: 11px; color: #888; }
+#modeBtn { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); background: #333; border: none; color: #fff; padding: 4px 10px; border-radius: 12px; font-size: 11px; cursor: pointer; }
+.chat-box { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.msg { max-width: 88%; padding: 10px 14px; border-radius: 14px; font-size: 15px; line-height: 1.5; word-wrap: break-word; white-space: pre-wrap; }
 .user { background: #2b2b5e; align-self: flex-end; border-bottom-right-radius: 4px; }
 .bot { background: #1e1e2e; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid #2a2a4a; }
+.system { background: #1a1a2e; align-self: center; font-size: 12px; color: #888; border: 1px solid #333; text-align: center; max-width: 95%; }
 .typing { color: #888; font-style: italic; }
-.tokens { font-size: 11px; color: #666; margin-top: 4px; text-align: right; }
-.input-bar {
-  display: flex;
-  padding: 12px;
-  gap: 8px;
-  background: #1a1a2e;
-  border-top: 1px solid #2a2a4a;
-  position: sticky;
-  bottom: 0;
-}
-.input-bar input {
-  flex: 1;
-  padding: 12px 16px;
-  border: 1px solid #333;
-  border-radius: 24px;
-  background: #141414;
-  color: #e0e0e0;
-  font-size: 15px;
-  outline: none;
-}
+.tokens { font-size: 10px; color: #555; margin-top: 2px; text-align: right; }
+pre { background: #0a0a0a; padding: 8px; border-radius: 8px; overflow-x: auto; font-size: 12px; margin: 4px 0; }
+.input-bar { display: flex; padding: 10px; gap: 6px; background: #1a1a2e; border-top: 1px solid #2a2a4a; }
+.input-bar input { flex: 1; padding: 10px 14px; border: 1px solid #333; border-radius: 20px; background: #141414; color: #e0e0e0; font-size: 15px; outline: none; }
 .input-bar input:focus { border-color: #5555cc; }
-.input-bar button {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: none;
-  background: #5555cc;
-  color: #fff;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+.input-bar button { width: 42px; height: 42px; border-radius: 50%; border: none; background: #5555cc; color: #fff; font-size: 18px; cursor: pointer; }
 .input-bar button:active { background: #4444bb; }
-.settings {
-  background: #1a1a2e;
-  padding: 12px 16px;
-  border-top: 1px solid #2a2a4a;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.settings input {
-  flex: 1;
-  min-width: 120px;
-  padding: 8px 12px;
-  border: 1px solid #333;
-  border-radius: 8px;
-  background: #141414;
-  color: #e0e0e0;
-  font-size: 13px;
-  outline: none;
-}
-.settings label { font-size: 12px; color: #888; }
-.settings select {
-  padding: 8px 12px;
-  border: 1px solid #333;
-  border-radius: 8px;
-  background: #141414;
-  color: #e0e0e0;
-  font-size: 13px;
-  outline: none;
-}
-#toggleSettings {
-  background: none;
-  border: 1px solid #333;
-  color: #888;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  cursor: pointer;
-}
-#toggleSettings:hover { border-color: #5555cc; color: #fff; }
+.settings { background: #1a1a2e; padding: 12px 16px; border-top: 1px solid #2a2a4a; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.settings input, .settings select { padding: 8px 10px; border: 1px solid #333; border-radius: 8px; background: #141414; color: #e0e0e0; font-size: 12px; outline: none; }
+.settings input { flex: 1; min-width: 100px; }
+.settings label { font-size: 11px; color: #888; }
+#toggleSettings { background: none; border: 1px solid #333; color: #888; padding: 4px 10px; border-radius: 8px; font-size: 11px; cursor: pointer; }
 .hidden { display: none !important; }
-pre { background: #0a0a0a; padding: 8px; border-radius: 8px; overflow-x: auto; font-size: 13px; margin: 4px 0; }
-code { font-family: 'Consolas', 'Monaco', monospace; }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>💬 OpenCode Go Chat</h1>
+  <button id="modeBtn">🌐 Proxy</button>
+  <h1>💬 OC Go Chat</h1>
   <span id="statusModel">deepseek-v4-flash</span>
 </div>
 
 <div class="settings hidden" id="settingsPanel">
-  <label>API Key:</label>
-  <input type="password" id="apiKeyInput" placeholder="ocgo_..." value="">
+  <label>Key:</label>
+  <input type="password" id="apiKeyInput" placeholder="API Key">
   <label>Model:</label>
   <select id="modelSelect">
     <option value="deepseek-v4-flash">deepseek-v4-flash</option>
@@ -139,33 +57,32 @@ code { font-family: 'Consolas', 'Monaco', monospace; }
     <option value="kimi-k2.6">kimi-k2.6</option>
     <option value="kimi-k2.5">kimi-k2.5</option>
     <option value="glm-5.1">glm-5.1</option>
-    <option value="glm-5">glm-5</option>
     <option value="minimax-m3">minimax-m3</option>
     <option value="minimax-m2.7">minimax-m2.7</option>
-    <option value="mimo-v2.5">mimo-v2.5</option>
-    <option value="mimo-v2.5-pro">mimo-v2.5-pro</option>
     <option value="qwen3.7-max">qwen3.7-max</option>
-    <option value="qwen3.7-plus">qwen3.7-plus</option>
   </select>
-  <button id="saveSettings" style="background:#5555cc;border:none;color:#fff;padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer;">حفظ</button>
+  <button id="saveSettings" style="background:#5555cc;border:none;color:#fff;padding:8px 14px;border-radius:8px;font-size:12px;cursor:pointer;">حفظ</button>
 </div>
 
 <div class="chat-box" id="chatBox">
-  <div class="msg bot">👋 مرحباً! أكتب حاجة وأنا أرد عليك.<br>اضغط على ⚙️ عشان تضبط API Key والموديل.</div>
+  <div class="msg bot">👋 مرحباً!</div>
 </div>
 
 <div class="input-bar">
-  <input id="userInput" type="text" placeholder="اكتب رسالة..." autocomplete="off">
-  <button id="toggleSettings" style="width:40px;height:40px;border-radius:50%;border:1px solid #333;background:transparent;color:#888;font-size:18px;cursor:pointer;">⚙️</button>
+  <input id="userInput" type="text" placeholder="اكتب..." autocomplete="off">
+  <button id="settingsBtn" style="width:36px;height:36px;border-radius:50%;border:1px solid #333;background:transparent;color:#888;font-size:16px;cursor:pointer;">⚙️</button>
   <button id="sendBtn">➤</button>
 </div>
 
 <script>
-const DIRECT_URL = 'https://opencode.ai/zen/go/v1';
-const PROXY_URL = 'https://corsproxy.io/?' + encodeURIComponent(DIRECT_URL);
-let API_BASE = PROXY_URL;
-let apiKey = localStorage.getItem('ocgo_key') || '';
-let model = localStorage.getItem('ocgo_model') || 'deepseek-v4-flash';
+const DIRECT = 'https://opencode.ai/zen/go/v1/chat/completions';
+const PROXY1 = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(DIRECT);
+const PROXY2 = 'https://corsproxy.io/?' + encodeURIComponent(DIRECT);
+let endpoint = DIRECT;
+let useProxy = true;
+
+let apiKey = localStorage.getItem('ok') || '';
+let model = localStorage.getItem('om') || 'deepseek-v4-flash';
 
 const chatBox = document.getElementById('chatBox');
 const userInput = document.getElementById('userInput');
@@ -174,28 +91,48 @@ const apiKeyInput = document.getElementById('apiKeyInput');
 const modelSelect = document.getElementById('modelSelect');
 const statusModel = document.getElementById('statusModel');
 const settingsPanel = document.getElementById('settingsPanel');
-const toggleBtn = document.getElementById('toggleSettings');
+const settingsBtn = document.getElementById('settingsBtn');
+const modeBtn = document.getElementById('modeBtn');
 
 if (apiKey) apiKeyInput.value = apiKey;
 modelSelect.value = model;
 statusModel.textContent = model;
+updateMode();
 
-toggleBtn.onclick = () => settingsPanel.classList.toggle('hidden');
+settingsBtn.onclick = () => settingsPanel.classList.toggle('hidden');
+
+function updateMode() {
+  if (useProxy) {
+    endpoint = PROXY1;
+    modeBtn.textContent = '🔁 Proxy 1';
+    modeBtn.style.background = '#5a5';
+  } else {
+    endpoint = DIRECT;
+    modeBtn.textContent = '🌐 Direct';
+    modeBtn.style.background = '#5555cc';
+  }
+}
+
+modeBtn.onclick = () => {
+  useProxy = !useProxy;
+  updateMode();
+  addMsg('system', useProxy ? '🔄 Proxy mode' : '🌐 Direct mode');
+};
 
 document.getElementById('saveSettings').onclick = () => {
   apiKey = apiKeyInput.value.trim();
   model = modelSelect.value;
-  localStorage.setItem('ocgo_key', apiKey);
-  localStorage.setItem('ocgo_model', model);
+  localStorage.setItem('ok', apiKey);
+  localStorage.setItem('om', model);
   statusModel.textContent = model;
   settingsPanel.classList.add('hidden');
-  addMsg('bot', `✅ تم الحفظ. الموديل: ${model}`);
+  addMsg('system', '✅ تم الحفظ');
 };
 
 function addMsg(role, text) {
   const div = document.createElement('div');
   div.className = `msg ${role}`;
-  div.innerHTML = text.replace(/\n/g, '<br>');
+  div.textContent = text;
   chatBox.appendChild(div);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
@@ -209,72 +146,74 @@ function showTyping() {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function removeTyping() {
-  const t = document.getElementById('typing');
-  if (t) t.remove();
-}
+function removeTyping() { const t = document.getElementById('typing'); if (t) t.remove(); }
 
 async function sendMessage() {
   const msg = userInput.value.trim();
   if (!msg) return;
-  if (!apiKey) { addMsg('bot', '⚠️ دخل API Key الأول من ⚙️'); return; }
+  if (!apiKey) { addMsg('system', '⚠️ دخل API Key'); return; }
 
   userInput.value = '';
   addMsg('user', msg);
   showTyping();
 
   try {
-    const res = await fetch(`${API_BASE}/chat/completions`, {
+    const payload = {
+      model: model,
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'user', content: msg }
+      ],
+      max_tokens: 4096,
+      stream: false
+    };
+
+    const res = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': 'Bearer ' + apiKey
       },
-      body: JSON.stringify({
-        model: model,
-        messages: [
-          { role: 'system', content: 'You are a helpful assistant. Respond in the same language the user writes in.' },
-          { role: 'user', content: msg }
-        ],
-        max_tokens: 4096,
-        stream: false
-      })
+      body: JSON.stringify(payload)
     });
 
-    const data = await res.json();
-
-    if (data.error) {
+    if (!res.ok) {
+      const txt = await res.text();
       removeTyping();
-      addMsg('bot', `❌ ${data.error.message || 'حدث خطأ'}`);
+      addMsg('system', `❌ ${res.status}: ${txt.slice(0, 300)}`);
       return;
     }
 
-    const reply = data.choices?.[0]?.message?.content || '⚠️ مفيش رد';
+    const data = await res.json();
+    const reply = data.choices?.[0]?.message?.content || '⚠️';
     const tokens = data.usage?.total_tokens || 0;
 
     removeTyping();
-
-    const div = document.createElement('div');
-    div.className = 'msg bot';
-    div.innerHTML = reply.replace(/\n/g, '<br>');
-    chatBox.appendChild(div);
-
-    const tokDiv = document.createElement('div');
-    tokDiv.className = 'tokens';
-    tokDiv.textContent = `🔤 ${tokens} tokens`;
-    chatBox.appendChild(tokDiv);
-
+    addMsg('bot', reply);
+    if (tokens) {
+      const t = document.createElement('div');
+      t.className = 'tokens';
+      t.textContent = `🔤 ${tokens} tok`;
+      chatBox.appendChild(t);
+    }
     chatBox.scrollTop = chatBox.scrollHeight;
-
   } catch (err) {
     removeTyping();
-    addMsg('bot', `❌ خطأ: ${err.message}`);
+    addMsg('system', `❌ ${err.message}`);
+    // Auto-switch proxy on failure
+    if (useProxy) {
+      useProxy = false;
+      updateMode();
+      addMsg('system', '🔄 جرب Direct mode');
+    }
   }
 }
 
 sendBtn.onclick = sendMessage;
 userInput.onkeydown = (e) => { if (e.key === 'Enter') sendMessage(); };
-</script>
 
+// Load test
+addMsg('system', '📱 جاهز... اكتب أو غير الإعدادات ⚙️');
+</script>
 </body>
 </html>
