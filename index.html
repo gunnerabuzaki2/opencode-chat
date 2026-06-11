@@ -161,7 +161,9 @@ code { font-family: 'Consolas', 'Monaco', monospace; }
 </div>
 
 <script>
-const API_BASE = 'https://opencode.ai/zen/go/v1';
+const DIRECT_URL = 'https://opencode.ai/zen/go/v1';
+const PROXY_URL = 'https://corsproxy.io/?' + encodeURIComponent(DIRECT_URL);
+let API_BASE = PROXY_URL;
 let apiKey = localStorage.getItem('ocgo_key') || '';
 let model = localStorage.getItem('ocgo_model') || 'deepseek-v4-flash';
 
